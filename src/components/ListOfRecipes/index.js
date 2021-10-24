@@ -13,6 +13,7 @@ const ListOfRecipes = ({recipeData}) =>{
             renderItem={({item})=>{
                 return(
                     <FoodBlock
+                        data={item}
                         image={item.recipe.image}
                         name={item.recipe.label}
                         time={Math.floor(item.recipe.calories)}

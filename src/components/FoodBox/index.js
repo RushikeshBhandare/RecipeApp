@@ -1,31 +1,40 @@
 import React from 'react'
-import { View, StyleSheet,Text, Image} from 'react-native'
+import { View, StyleSheet,Text, Image, TouchableOpacity} from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 
-const FoodBlock = ({image, time, name}) =>{
+const FoodBlock = ({image, time, name, data}) =>{
+    const navigation = useNavigation()
   return(
       <View style={styles.rootContainer}>
-          {/* image of the Food */}
-          <View style={styles.imageBlock}>
-            <Image 
-                style={styles.image}
-                source={{uri:image}}  
-            />
-          </View>
-          {/* Time And Name  */}
-          <View style={styles.infoBlock}>
-            {/* Name  */}
-            <View style={styles.nameBlock}>
-                <Text style={styles.nameText}>{name}</Text>
-            </View>
+          <TouchableOpacity
+                onPress={()=>{
+                    navigation.navigate('Detail', {data})
+                }}
+          >
 
-            {/* time required */}
-            <View style={styles.timeBlock}>
-                <Text style={styles.timeText}>{time} Cal</Text>
-            </View>
-           
+                {/* image of the Food */}
+                <View style={styles.imageBlock}>
+                    <Image 
+                        style={styles.image}
+                        source={{uri:image}}  
+                    />
+                </View>
+                {/* Time And Name  */}
+                <View style={styles.infoBlock}>
+                    {/* Name  */}
+                    <View style={styles.nameBlock}>
+                        <Text style={styles.nameText}>{name}</Text>
+                    </View>
 
-          </View>
+                    {/* time required */}
+                    <View style={styles.timeBlock}>
+                        <Text style={styles.timeText}>{time} Cal</Text>
+                    </View>
+                
+
+                </View>
+          </TouchableOpacity>
       </View>
   )
 }

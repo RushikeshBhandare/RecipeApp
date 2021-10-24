@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, ScrollView, Text, StyleSheet} from 'react-native'
+import { View, ScrollView, Text, StyleSheet, Keyboard} from 'react-native'
 import Axios from 'axios'
 
 import ListOfRecipes from '../../src/components/ListOfRecipes'
@@ -21,11 +21,20 @@ const HomeScreen = () =>{
       
     const getRecords = async( ) =>{
         try{
-            const res = await Axios.get(url)
-            setResipes(res.data.hits)
-            console.log(recipes.length)
-            setSearchedValue(search)
-            setSearch('')
+            if(search != ''){
+                const res = await Axios.get(url)
+                setResipes(res.data.hits)
+
+                console.log('###########################################################')
+                console.log(res.data.hits[0].recipe.ingredients)
+                console.log('###########################################################')
+
+                setSearchedValue(search)
+                setSearch('')
+                Keyboard.dismiss()
+            }else{
+                return;
+            }
         }catch(error){
             console.log(error)
             return 
@@ -39,7 +48,9 @@ const HomeScreen = () =>{
 
 
     return(
-        <View>
+        <View style={{
+            backgroundColor: 'white'
+        }}>
             <AppHeader/>
             <SearchBar search={search} setSearch={setSearch} onPress={getRecords}/>
             <Text style={{

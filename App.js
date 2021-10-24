@@ -1,17 +1,31 @@
 import React from 'react'
-import { View, Text} from 'react-native'
+import {NavigationContainer} from '@react-navigation/native'
+import {createStackNavigator} from '@react-navigation/stack'
+
+import 'react-native-gesture-handler';
+
+import DetailScreen from './screens/DetailScreen'
 import HomeScreen from './screens/HomeScreen'
-import FoodBlock from './src/components/FoodBox'
+import RenderIngredents from './src/components/RenderIngredents'
+
+const Stack = createStackNavigator()
 
 const App = () =>{
+  
   return(
-    <View style={{
-      flex: 1
-    }}>
-
-      <HomeScreen/>
-    </View>
-  )
+    <NavigationContainer>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Detail" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+    // <HomeScreen/>  
+    // <DetailScreen/>
+    )
 }
 
 export default App
